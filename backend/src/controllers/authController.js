@@ -70,7 +70,7 @@ export const register = async (req, res) => {
  * - Verifies credentials
  * - Issues JWT in HTTP-only cookie
  */
-export const login = async (req, res) => {
+export const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
