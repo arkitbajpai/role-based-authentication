@@ -3,6 +3,10 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
+import cookieParser from "cookie-parser";
+import adminRoutes from './routes/adminRoutes.js';
+app.use(cookieParser());
+
 
 app.use('/api/auth', authRoutes);
 
@@ -17,6 +21,7 @@ app.use(express.json());
 app.get('/',(req,res)=>{
     res.send('API is running...');
 });
+app.use("/api/admin", adminRoutes);
 
 const PORT= process.env.PORT || 4999;
 app.listen(PORT,()=>{
