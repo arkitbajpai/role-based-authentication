@@ -1,6 +1,9 @@
 import express from "express";
 import protectRoute from "../middleware/authMiddleware.js";
 import adminOnly from "../middleware/adminMiddleware.js";
+import { createUserByAdmin } from "../controllers/adminController.js";
+import adminMiddleware from "../middleware/adminMiddleware.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -15,5 +18,12 @@ router.get(
     });
   }
 );
+router.post(
+  "/create-user",
+  authMiddleware,
+  adminMiddleware,
+  createUserByAdmin
+);
+
 
 export default router;
