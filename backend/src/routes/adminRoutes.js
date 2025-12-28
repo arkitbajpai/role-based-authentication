@@ -13,7 +13,7 @@ router.get(
   adminOnly,
   (req, res) => {
     res.status(200).json({
-      message: "Welcome Admin",
+      message: "Welcome Admin yeah!",
       user: req.user
     });
   }
