@@ -17,8 +17,17 @@ app.use(express.json());
 app.use(cookieParser());
 
 
+
+app.use(
+  cors({
+    origin: "http://localhost:5174",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
+//app.options("*", cors());
 app.use('/api/auth', authRoutes);
-// app.use(cors());
 
 app.get('/',(req,res)=>{
     res.send('API is running...');
