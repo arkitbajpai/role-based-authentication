@@ -1,6 +1,6 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
-import Login from './components/Login.jsx';
-import AdminDashboard from './components/AdminDashboard.jsx';
+import Login from "../src/pages/Login.jsx";
+import AdminDashboard from '../src/pages/AdminDashboard.jsx';
 
 const App=()=>{
   return (
