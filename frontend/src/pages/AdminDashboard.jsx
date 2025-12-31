@@ -18,7 +18,7 @@ const handleLogout = async () => {
 
 return(
     <div>
-        <h1>Admin Dashboard</h1>
+        <h1>Admin Dashboard1 </h1>
         <button onClick={handleLogout}>Logout</button>
     </div>
 );
