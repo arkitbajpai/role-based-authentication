@@ -10,6 +10,26 @@ const AdminDashboard = () => {
   }, []);
 
 
+  const handelCreateUser=async(e)=>{
+    e.preventDefault();
+    try{
+        await api.post("/admin/create-user",{
+            email,
+            password,
+            role
+        });
+        alert("User created successfully by admin");
+        setEmail("");
+        setPassword("");
+        setRole("user");
+    }
+    catch(err){
+        alert("User creation failed at admin dashboard");
+    }
+    
+  }
+
+
 const handleLogout = async () => {
     await api.post("/auth/logout");
     window.location.href = "/login";
