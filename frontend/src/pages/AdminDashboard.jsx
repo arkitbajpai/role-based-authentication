@@ -40,31 +40,49 @@ const handleLogout = async () => {
   };
 
 
-return(
-    <div>
-        <h1>Admin Dashboard1 </h1>
-        <form onSubmit={handelCreateUser}>
-            <input
-                type="email"
-                placeholder="User Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="User Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <select value={role} onChange={(e) => setRole(e.target.value)}>
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-            </select>
-            <button type="submit">Create User</button>
-        </form>
-        <hr/>
-        <button onClick={handleLogout}>Logout</button>
+return (
+  <div className="auth-page">
+    <div className="glass-card">
+      <h2>Admin Dashboard</h2>
+
+      <form onSubmit={handelCreateUser}>
+        <input
+          className="auth-input"
+          placeholder="User Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          className="auth-input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <select
+          className="auth-input"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+
+        <button className="primary-btn" type="submit">
+          Create User
+        </button>
+      </form>
+
+      <button
+        style={{ marginTop: "15px", background: "transparent", color: "#fff" }}
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
     </div>
+  </div>
 );
 };
 export default AdminDashboard;

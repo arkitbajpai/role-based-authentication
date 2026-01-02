@@ -27,21 +27,38 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-    </form>
-  );
+  <div className="auth-page">
+    <div className="glass-card">
+      <h2>Login</h2>
+
+      <form onSubmit={handleLogin}>
+        <input
+          className="auth-input"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          className="auth-input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button className="primary-btn" type="submit">
+          Login
+        </button>
+      </form>
+
+      <p className="helper-text">
+        Don’t have an account? <span>Register</span>
+      </p>
+    </div>
+  </div>
+);
+
 };
 
 export default Login;
