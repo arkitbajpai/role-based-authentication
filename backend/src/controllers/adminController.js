@@ -35,3 +35,51 @@ export const createUserByAdmin = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
+export const getAllUsers=async(req,res)=>{
+    try{
+        const users = await User.find().select("-password").populate('cretatedBy','email role');
+        res.status(200).json({ users });
+
+    }catch(error){
+
+        console.error("Get all users error:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+export const deleteUserByAdmin=async(req,res)=>{
+    try{
+        const userId=req.params.id;
+        if(userId===req.user._id.toString()){
+            return res.status(400).json({ message: "Admin cannot delete self" });
+        }
+        await User.findByIdAndDelete(userId);
+        res.status(200).json({ message: "User deleted successfully by admin" });
+    }
+    catch(error){
+        console.error("Delete user by admin error:", error);
+    }
+};
+
+export const changeUserRole=async(req,res)=>{
+    try{
+        const userId=req.params.id;
+        const { role }=req.body;
+        if(userId===req.user._id.toString()){
+            return res.status(400).json({ message: "Admin cannot update self" });
+        }
+        const updatedUser=await User.findByIdAndUpdate(
+            userId,
+            { role: role === "admin" ? "admin" : "user" },  
+            { new: true }
+        ).select("-password");
+        res.status(200).json({
+            message: "User role updated successfully by admin",
+            user: updatedUser
+        });
+    } catch(error){
+        console.error("Update user role by admin error:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+     };
