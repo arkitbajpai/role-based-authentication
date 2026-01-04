@@ -7,12 +7,17 @@ const AdminDashboard = () => {
     const [email, setEmail] = useState("");
     const [password,setPassword]=useState("");
     const [role,setRole]=useState("user");
+    const [users,setUsers]=useState([]);
   useEffect(() => {
     api.get("/admin/dashboard").catch(() => {
       window.location.href = "/login";
     });
   }, []);
-
+  useEffect(()=>{
+    api.get("/admin/users")
+    .then(res=>setUsers(res.data.users))
+    .catch(err=>alert("Failed to fetch users at admin dashboard"));
+  },[]);
 
   const handelCreateUser=async(e)=>{
     e.preventDefault();
@@ -32,7 +37,23 @@ const AdminDashboard = () => {
     }
     
   }
+  const handleDeleteUser=async(userId)=>{
+    try{
+        await api.delete(`/admin/users/${userId}`);
+        setUsers(users.filter(user=>user._id!==userId));
+        alert("User deleted successfully by admin");
+    }   
+    catch(err){
+        alert("User deletion failed at admin dashboard");
+    }   
+    };
 
+    const handleRoleChange = async (id, role) => {
+  await api.patch(`/admin/users/${id}`, { role });
+  setUsers(users.map(u =>
+    u._id === id ? { ...u, role } : u
+  ));
+};
 
 const handleLogout = async () => {
     await api.post("/auth/logout");
@@ -74,6 +95,45 @@ return (
           Create User
         </button>
       </form>
+      <h3 style={{ marginTop: "30px" }}>Users</h3>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Created By</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {users.map(user => (
+      <tr key={user._id}>
+        <td>{user.email}</td>
+        <td>{user.role}</td>
+        <td>{user.createdBy?.email || "—"}</td>
+        <td>
+          <button onClick={() =>
+            handleRoleChange(
+              user._id,
+              user.role === "admin" ? "user" : "admin"
+            )
+          }>
+            Toggle Role
+          </button>
+
+          <button
+            style={{ marginLeft: "10px" }}
+            onClick={() => handleDelete(user._id)}
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
 
       <button
         style={{ marginTop: "15px", background: "transparent", color: "#fff" }}
