@@ -28,7 +28,7 @@ input, select, button {
   backdrop-filter: blur(12px);
   border-radius: 14px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  text-align: center;
+  overflow-x: auto;
 }
 
 .auth-input {
@@ -59,3 +59,49 @@ input, select, button {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.user-table th {
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.user-row:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.action-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-role {
+  background: #ffffff;
+  color: #333;
+}
+
+.btn-delete {
+  background: #ff4d4f;
+  color: white;
+}
+

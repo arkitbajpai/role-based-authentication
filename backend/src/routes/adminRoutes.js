@@ -2,7 +2,7 @@ import express from "express";
 import protectRoute from "../middleware/authMiddleware.js";
 import adminOnly from "../middleware/adminMiddleware.js";
 import { createUserByAdmin,getAllUsers,
-  deleteUser,
+  deleteUserByAdmin as deleteUser,
   changeUserRole} from "../controllers/adminController.js";
 import adminMiddleware from "../middleware/adminMiddleware.js";
 import authMiddleware from "../middleware/authMiddleware.js";

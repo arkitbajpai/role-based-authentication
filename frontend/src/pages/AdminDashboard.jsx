@@ -97,7 +97,7 @@ return (
       </form>
       <h3 style={{ marginTop: "30px" }}>Users</h3>
 
-<table width="100%">
+<table className="user-table">
   <thead>
     <tr>
       <th>Email</th>
@@ -106,33 +106,40 @@ return (
       <th>Actions</th>
     </tr>
   </thead>
+
   <tbody>
-    {users.map(user => (
-      <tr key={user._id}>
+    {users.map((user) => (
+      <tr key={user._id} className="user-row">
         <td>{user.email}</td>
         <td>{user.role}</td>
         <td>{user.createdBy?.email || "—"}</td>
         <td>
-          <button onClick={() =>
-            handleRoleChange(
-              user._id,
-              user.role === "admin" ? "user" : "admin"
-            )
-          }>
-            Toggle Role
-          </button>
+          <div className="action-btns">
+            <button
+              className="btn btn-role"
+              onClick={() =>
+                handleRoleChange(
+                  user._id,
+                  user.role === "admin" ? "user" : "admin"
+                )
+              }
+            >
+              Toggle
+            </button>
 
-          <button
-            style={{ marginLeft: "10px" }}
-            onClick={() => handleDelete(user._id)}
-          >
-            Delete
-          </button>
+            <button
+              className="btn btn-delete"
+              onClick={() => handleDeleteUser(user._id)}
+            >
+              Delete
+            </button>
+          </div>
         </td>
       </tr>
     ))}
   </tbody>
 </table>
+
 
 
       <button

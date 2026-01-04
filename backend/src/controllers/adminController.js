@@ -19,7 +19,7 @@ export const createUserByAdmin = async (req, res) => {
             email,  
             password: hashedPassword,  
             role: role === "admin" ? "admin" : "user",
-            cretatedBy: req.user._id
+            createdBy: req.user._id
         });
         res.status(201).json({
             message: "User created successfully by admin",
@@ -38,7 +38,7 @@ export const createUserByAdmin = async (req, res) => {
 
 export const getAllUsers=async(req,res)=>{
     try{
-        const users = await User.find().select("-password").populate('cretatedBy','email role');
+        const users = await User.find().select("-password").populate('createdBy','email role');
         res.status(200).json({ users });
 
     }catch(error){
