@@ -52,7 +52,7 @@ export const deleteUserByAdmin=async(req,res)=>{
     try{
         const userId=req.params.id;
         if(userId===req.user._id.toString()){
-            return res.status(400).json({ message: "Admin cannot delete self" });
+            return res.status(400).json({ message: "Admin cannot delete self sorry " });
         }
         await User.findByIdAndDelete(userId);
         res.status(200).json({ message: "User deleted successfully by admin" });
