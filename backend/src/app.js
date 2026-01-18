@@ -5,6 +5,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import cookieParser from "cookie-parser";
 import adminRoutes from './routes/adminRoutes.js';
+import roomRoutes from './routes/room.routes.js';
 
 
 
@@ -28,6 +29,7 @@ app.use(
 );
 //app.options("*", cors());
 app.use('/api/auth', authRoutes);
+app.use("/api/rooms", roomRoutes);
 
 app.get('/',(req,res)=>{
     res.send('API is running...');
